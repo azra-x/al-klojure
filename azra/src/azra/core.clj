@@ -52,6 +52,8 @@
     (zero? (rem x y)) false
     :else (recur x (inc y))))
 
+
+
 (defn prime? [x]
   (cond (<= x 1) false
     (= x 2) true
@@ -60,10 +62,13 @@
 
 (defn listprima [x] 
   (filter 
-    prime? (range x)))
+    prime? (range (+ 2 x))))
 
 (defn factor [x] 
   (filter #(zero? (rem x %)) (range 1 x)))
+
+(apply + ((fn factor [x] 
+  (filter #(zero? (rem x %)) (range 1 x))) 2))
 
 (def pro-6-a 
     (sum (map #(pangkat % 2) (range 101))))
@@ -83,7 +88,7 @@
   (map read-string (map str (seq (str x)))))
 
 (defn pro-21-a [x]
-  (reduce + (- x)(factor x)))
+  (reduce + (- x) (factor x)))
 
 (defn ami [x] (sum (butlast (factor x))))
 
@@ -110,8 +115,6 @@
 (defn angka20 []
   '(1 4 6 8 9 10 12 14 15 16 18 19 20))  
 
-(defn sukasuka [x y]
-  (let [y (apply * (filter prime? (range 20)))]))
 
 (defn diagonal [n]
   (let [a 8] (+ n a (diagonal a))))  
@@ -137,22 +140,89 @@
         :when (and (< 1000 (+ a b c) (= z (+ x y))))]
     (+ a b c)))
 
-(defn alklo-1 []
+(defn alklo-testloop []
   (loop [x 5 result []]
     (if (> x 0)
       (recur (dec x) (conj result (+ 2 x)))
       result)))
 
-(def nama (read-string (str "[" (slurp "euler-22.txt") "]")) )
+(def alklo-sial 
+  not=)
+(def alklo-dalempos 
+  #(butlast ( interleave %2 (take (count %2) (repeat %1)))))
 
-(defn tai [[a & b]] b)
+(def alklo-bala (fn bala [x y] 
+  (if (contains? y x)
+  (= nil (x y))
+  false)))
+
+(def alklo-zipmaptai #(apply hash-map 
+                             (mapcat list %2 (replicate (count %2) %1))))
+
+;(def nama (read-string (str "[" (slurp "euler-22.txt") "]")) )
 
 
-;; 1 + 2 + 3 + 4 + 5 + 6
-
+(def alklo-second2last (fn [x] (last (butlast x))))
 (defn maxi [& xs]
   (if (every? #(> (first xs) %) (rest xs))
     (first xs)
     (apply maxi (rest xs))))
 
-(reduce (fn [a b] (if (> a b) a b)) 1 2 3 4 5)
+(def alklo-mylast (fn [x] (first (reverse x))))
+
+(def alklo-countanjing (fn anjing [x] (if (empty? x) 
+          0
+          (+ 1 (anjing (rest x))))))
+
+
+(def alklo-copysebnyk2 #(sort (apply concat (take 2 (repeat %)))))
+
+(def alklo-copysebanyakbla #(apply concat (map (partial replicate %2 ) % )))
+
+(def alklo-poseselangseling! #(butlast ( interleave %2 (take (count %2) (repeat %1)))))
+
+(def alklo-palindromdetect #(= (seq %) (reverse %)))
+
+(def alklo-figurethisoutpro-29 #(apply str (re-seq #"[A-Z]+" %)))
+
+
+(defn alklo-fibo [x]
+  (loop [awal 1 result [1] ]
+    (if (= x (count result))
+      result
+      (recur (+' awal (last result)) (conj result awal)))))
+
+
+;;buat masukin value kedalem list of keys
+
+(def value '( #(zipmap %2 (take (count %2) (repeat %1)))))
+
+(->> [1 2 3 4]
+  (map #(replicate 2 %))
+  (flatten))
+
+
+(def alklo-interpose #(butlast ( interleave %2 (take (count %2) (repeat %1)))))
+
+(def alklo-rangegokil #(take (- %2 %1) (iterate inc %)))
+
+(partial remove #(= (nth %1 (- %2 1)) %1))
+
+(def alklo-wow #(apply concat (partition (- %2 1) %2 %1)))
+
+(def alklo-dotproduct #(apply + (map * %1 %2)))
+
+
+(fn [x y]
+  (loop [first 1 result []]
+    (if x result
+      (recur (y first) (conj [] first)))))
+
+(def al-klojure80 (fn [a] (if (= a (apply + ((fn factor [x] (filter #(zero? (rem x %)) (range 1 x))) a))) true false)))
+
+
+
+
+
+
+
